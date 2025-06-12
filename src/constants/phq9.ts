@@ -16,15 +16,15 @@ const surveyAnswerOptions = [
     label: "전혀 없음",
   },
   {
-    emoji: "😊",
+    emoji: "🙂",
     label: "간혹 있음",
   },
   {
-    emoji: "😊",
+    emoji: "😕",
     label: "자주 있음",
   },
   {
-    emoji: "😊",
+    emoji: "🥲",
     label: "거의 매일",
   },
 ];
