@@ -7,7 +7,8 @@ import MyPage from "../pages/my";
 import AuthLayout from "./layout/AuthLayout";
 import PHQPage from "../pages/phq";
 import HeaderLayout from "./layout/HeaderLayout";
-import Emotionpage from "../pages/emotion";
+import EmotionPage from "../pages/emotion";
+import CommunicationPage from "../pages/communication";
 
 const routes: RouteObject[] = [
   {
@@ -40,7 +41,11 @@ const routes: RouteObject[] = [
           },
           {
             path: "/emotion",
-            element: <Emotionpage />,
+            element: <EmotionPage />,
+          },
+          {
+            path: "/communication",
+            element: <CommunicationPage />,
           },
         ],
       },

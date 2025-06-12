@@ -11,7 +11,12 @@ const tabBarList = [
     activeIcon: <HomeIcon fill="#FF9B9B" />,
     path: "/",
     isActive: (path: string) => {
-      return path === "/" || path === "/phq";
+      return (
+        path === "/" ||
+        path === "/phq" ||
+        path === "/emotion" ||
+        path === "/communication"
+      );
     },
   },
   {

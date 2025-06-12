@@ -1,4 +1,4 @@
-import { tabBarList } from "../constants/common";
+import { tabBarList } from "../constants/tab-bar";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function TabBar() {

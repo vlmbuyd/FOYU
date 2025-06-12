@@ -1,9 +1,12 @@
 import { useState } from "react";
+import clsx from "clsx";
 import Button from "../components/Button";
 import EmotionSelectionButton from "../components/emotion/EmotionSelectionButton";
 import { emotionSelectoins } from "../constants/emotion";
+import { useNavigate } from "react-router-dom";
 
-export default function Emotionpage() {
+export default function EmotionPage() {
+  const navigate = useNavigate();
   const [selectedEmotion, setSelectedEmotion] = useState<number | null>(null);
 
   return (
@@ -28,11 +31,10 @@ export default function Emotionpage() {
             onClick={() => setSelectedEmotion(idx)}
           >
             <EmotionSelectionButton
-              className={`transition-all ${
-                selectedEmotion === idx
-                  ? "ring-4 ring-white ring-offset-2 ring-offset-[#60A5FA]"
-                  : ""
-              }`}
+              className={clsx(
+                "transition-all",
+                selectedEmotion === idx ? "opacity-100" : ""
+              )}
             >
               {emotion.icon}
             </EmotionSelectionButton>
@@ -50,8 +52,9 @@ export default function Emotionpage() {
       </section>
 
       <Button
-        className="w-[320px] h-12 bg-blue-500 text-white font-bold disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+        className="w-[320px] h-13 bg-blue-500 text-white font-bold disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
         disabled={selectedEmotion === null}
+        onClick={() => navigate("/communication")}
       >
         완료
       </Button>

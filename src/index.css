@@ -3,6 +3,29 @@
 
 @theme {
   --color-primary: #ff9b9b;
+  --animate-wiggle: wiggle 3s ease-in-out infinite;
+
+  @keyframes wiggle {
+    0%,
+    10%,
+    20%,
+    30%,
+    40%,
+    50% {
+      transform: rotate(-10deg);
+    }
+    5%,
+    15%,
+    25%,
+    35%,
+    45% {
+      transform: rotate(10deg);
+    }
+    60%,
+    100% {
+      transform: rotate(0deg);
+    }
+  }
 }
 
 :root {
