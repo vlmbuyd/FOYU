@@ -1,6 +1,9 @@
+import phqImg from "../assets/bg/phq.png";
+import emotionImg from "../assets/bg/emotion.png";
+
 const backgroundImg: Record<string, string> = {
-  phq: "/src/assets/bg/phq.png",
-  emotion: "/src/assets/bg/emotion.png",
+  phq: phqImg,
+  emotion: emotionImg,
 };
 
 export { backgroundImg };
