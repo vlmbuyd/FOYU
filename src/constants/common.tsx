@@ -10,7 +10,9 @@ const tabBarList = [
     defaultIcon: <HomeIcon fill="#6B7280" />,
     activeIcon: <HomeIcon fill="#FF9B9B" />,
     path: "/",
-    isActive: (path: string) => path === "/",
+    isActive: (path: string) => {
+      return path === "/" || path === "/phq";
+    },
   },
   {
     label: "일기",

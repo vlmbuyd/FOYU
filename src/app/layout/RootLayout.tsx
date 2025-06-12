@@ -6,8 +6,6 @@ import { isAuthAtom } from "../../atom/authAtom";
 export default function RootLayout() {
   const isAuth = useAtomValue(isAuthAtom);
 
-  console.log(isAuth);
-
   return (
     <div className="min-w-[360px] max-w-[450px] h-screen pb-[75px] mx-auto">
       <Outlet />

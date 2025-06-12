@@ -5,6 +5,9 @@ import LoginPage from "../pages/login";
 import NotFoundPage from "../pages/404";
 import MyPage from "../pages/my";
 import AuthLayout from "./layout/AuthLayout";
+import PHQPage from "../pages/phq";
+import HeaderLayout from "./layout/HeaderLayout";
+import Emotionpage from "../pages/emotion";
 
 const routes: RouteObject[] = [
   {
@@ -25,6 +28,19 @@ const routes: RouteObject[] = [
           {
             path: "my",
             element: <MyPage />,
+          },
+        ],
+      },
+      {
+        element: <HeaderLayout />,
+        children: [
+          {
+            path: "/phq",
+            element: <PHQPage />,
+          },
+          {
+            path: "/emotion",
+            element: <Emotionpage />,
           },
         ],
       },
