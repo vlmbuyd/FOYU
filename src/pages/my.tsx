@@ -11,6 +11,7 @@ export default function MyPage() {
     setIsAuth(false);
     navigate("/login", { replace: true });
   };
+
   return (
     <div>
       <Button className="w-[165px] h-[48px]" onClick={handleLogout}>

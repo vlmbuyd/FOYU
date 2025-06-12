@@ -1,26 +1,10 @@
 import { createBrowserRouter, type RouteObject } from "react-router-dom";
-import RootLayout from "../components/RootLayout";
+import RootLayout from "./layout/RootLayout";
 import MainPage from "../pages/main";
 import LoginPage from "../pages/login";
 import NotFoundPage from "../pages/404";
 import MyPage from "../pages/my";
-
-const loginRoutes: RouteObject[] = [
-  {
-    path: "/login",
-    element: <RootLayout />,
-    children: [
-      {
-        index: true,
-        element: <LoginPage />,
-      },
-      {
-        path: "*",
-        element: <NotFoundPage />,
-      },
-    ],
-  },
-];
+import AuthLayout from "./layout/AuthLayout";
 
 const routes: RouteObject[] = [
   {
@@ -28,12 +12,21 @@ const routes: RouteObject[] = [
     element: <RootLayout />,
     children: [
       {
-        index: true,
-        element: <MainPage />,
+        path: "login",
+        element: <LoginPage />,
       },
       {
-        path: "/my",
-        element: <MyPage />,
+        element: <AuthLayout />,
+        children: [
+          {
+            index: true,
+            element: <MainPage />,
+          },
+          {
+            path: "my",
+            element: <MyPage />,
+          },
+        ],
       },
       {
         path: "*",
@@ -43,4 +36,4 @@ const routes: RouteObject[] = [
   },
 ];
 
-export const router = createBrowserRouter([...loginRoutes, ...routes]);
+export const router = createBrowserRouter([...routes]);
