@@ -15,7 +15,8 @@ const tabBarList = [
         path === "/" ||
         path === "/phq" ||
         path === "/emotion" ||
-        path === "/communication"
+        path === "/communication" ||
+        path === "/oncall"
       );
     },
   },

@@ -12,11 +12,12 @@ export default function HeaderLayout() {
         // 라우팅 경로와 매핑하여 배경화면 설정
         backgroundImage: `url(${imgSrc})`,
       }}
-      className="w-full h-screen bg-no-repeat bg-cover pt-[52px]"
+      className="relative w-full h-screen bg-no-repeat bg-cover pt-[52px]"
     >
-      <Outlet />
+      {/* dimmed */}
+      <div className="relative inset-0 bg-black opacity-40" />
       <Header />
-      <div className="z-10"></div>
+      <Outlet />
     </div>
   );
 }

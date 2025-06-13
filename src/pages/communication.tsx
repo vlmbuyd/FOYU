@@ -6,7 +6,12 @@ import Call from "../assets/icons/call.svg?react";
 export default function CommunicationPage() {
   const navigate = useNavigate();
 
+  const handleStartCall = () => {
+    navigate("/oncall");
+  };
+
   return (
+    // 전화 대기 중
     <div className="flex flex-col items-center pt-5">
       <div className="flex flex-col items-center gap-1 mb-22">
         <strong className="text-[36px] font-medium text-[#1F2937]">
@@ -32,7 +37,10 @@ export default function CommunicationPage() {
         >
           <Cancel width={24} height={24} />
         </button>
-        <button className="flex justify-center items-center w-[64px] h-[64px] rounded-full bg-[#61bf6e]">
+        <button
+          className="flex justify-center items-center w-[64px] h-[64px] rounded-full bg-[#61bf6e]"
+          onClick={handleStartCall}
+        >
           <Call />
         </button>
       </div>

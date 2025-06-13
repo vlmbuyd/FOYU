@@ -9,6 +9,8 @@ import PHQPage from "../pages/phq";
 import HeaderLayout from "./layout/HeaderLayout";
 import EmotionPage from "../pages/emotion";
 import CommunicationPage from "../pages/communication";
+import OnCallPage from "../pages/oncall";
+import SummaryPage from "../pages/summary";
 
 const routes: RouteObject[] = [
   {
@@ -46,6 +48,14 @@ const routes: RouteObject[] = [
           {
             path: "/communication",
             element: <CommunicationPage />,
+          },
+          {
+            path: "/oncall",
+            element: <OnCallPage />,
+          },
+          {
+            path: "/summary",
+            element: <SummaryPage />,
           },
         ],
       },
