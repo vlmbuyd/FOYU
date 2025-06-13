@@ -41,7 +41,7 @@ export default function SummaryPage() {
       <div className="flex flex-col gap-3">
         <Button
           className="w-[311px] h-[52px]"
-          onClick={() => navigate("/", { replace: true })}
+          onClick={() => navigate("/main", { replace: true })}
         >
           확인했어요
         </Button>

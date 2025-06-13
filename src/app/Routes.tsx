@@ -1,4 +1,8 @@
-import { createBrowserRouter, type RouteObject } from "react-router-dom";
+import {
+  createBrowserRouter,
+  type RouteObject,
+  Navigate,
+} from "react-router-dom";
 import RootLayout from "./layout/RootLayout";
 import MainPage from "../pages/main";
 import LoginPage from "../pages/login";
@@ -22,12 +26,13 @@ const routes: RouteObject[] = [
         element: <LoginPage />,
       },
       {
+        // '/' 경로로 접근 시 '/main'으로 리다이렉트
+        index: true,
+        element: <Navigate to="/main" replace />,
+      },
+      {
         element: <AuthLayout />,
         children: [
-          {
-            index: true,
-            element: <MainPage />,
-          },
           {
             path: "my",
             element: <MyPage />,
@@ -37,6 +42,10 @@ const routes: RouteObject[] = [
       {
         element: <HeaderLayout />,
         children: [
+          {
+            path: "/main",
+            element: <MainPage />,
+          },
           {
             path: "/phq",
             element: <PHQPage />,
@@ -59,6 +68,7 @@ const routes: RouteObject[] = [
           },
         ],
       },
+
       {
         path: "*",
         element: <NotFoundPage />,

@@ -9,10 +9,10 @@ const tabBarList = [
     label: "홈",
     defaultIcon: <HomeIcon fill="#6B7280" />,
     activeIcon: <HomeIcon fill="#FF9B9B" />,
-    path: "/",
+    path: "/main",
     isActive: (path: string) => {
       return (
-        path === "/" ||
+        path === "/main" ||
         path === "/phq" ||
         path === "/emotion" ||
         path === "/communication" ||
