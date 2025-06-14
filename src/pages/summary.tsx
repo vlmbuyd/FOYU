@@ -1,8 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import { formatTime } from "../utils/formatTime";
 
 export default function SummaryPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  console.log(location.state);
 
   return (
     <div className="flex flex-col justify-between items-center h-[85%] pt-8">
@@ -18,7 +22,7 @@ export default function SummaryPage() {
             통화 감정 요약
           </strong>
           <span className="text-[14px] font-normal text-[#4B5563]">
-            은지님과의 OO분 통화
+            은지님과의 {formatTime(location.state.callSeconds)}분 통화
           </span>
         </div>
 

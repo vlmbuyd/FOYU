@@ -17,4 +17,6 @@ const callOptions = [
   },
 ];
 
-export { callOptions };
+const MODEL = "model=gpt-4o-mini-realtime-preview-2024-12-17";
+
+export { callOptions, MODEL };
