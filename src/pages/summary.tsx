@@ -22,7 +22,7 @@ export default function SummaryPage() {
             통화 감정 요약
           </strong>
           <span className="text-[14px] font-normal text-[#4B5563]">
-            은지님과의 {formatTime(location.state.callSeconds)}분 통화
+            은지님과의 {formatTime(location.state.callSeconds)} 통화
           </span>
         </div>
 

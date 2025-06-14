@@ -15,6 +15,8 @@ import EmotionPage from "../pages/emotion";
 import CommunicationPage from "../pages/communication";
 import OnCallPage from "../pages/oncall";
 import SummaryPage from "../pages/summary";
+import MissionPage from "../pages/mission";
+import MissionLayout from "./layout/MissionLayout";
 
 const routes: RouteObject[] = [
   {
@@ -65,6 +67,15 @@ const routes: RouteObject[] = [
           {
             path: "/summary",
             element: <SummaryPage />,
+          },
+        ],
+      },
+      {
+        element: <MissionLayout />,
+        children: [
+          {
+            path: "/mission",
+            element: <MissionPage />,
           },
         ],
       },

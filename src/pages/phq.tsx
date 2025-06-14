@@ -28,7 +28,7 @@ export default function PHQPage() {
           편안한 마음으로 답변해주세요
         </p>
 
-        <Progressbar progress={progress} />
+        <Progressbar progress={progress} total={9} />
       </div>
 
       {/* 질문 */}

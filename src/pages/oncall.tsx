@@ -16,6 +16,7 @@ export default function OnCallPage() {
   const dcRef = useRef<RTCDataChannel | null>(null);
   const audioTrackRef = useRef<MediaStreamTrack | null>(null);
 
+  const [isOnCall, setIsOnCall] = useState(true);
   const [messages, setMessages] = useState<string[]>([]);
 
   const handleDataChannelMessage = (event: MessageEvent) => {
@@ -28,7 +29,6 @@ export default function OnCallPage() {
     try {
       const data = await apiRequest({
         url: `/session`,
-        method: "POST",
       });
 
       const EPHEMERAL_KEY = data.data.client_secret.value; //임시 키 발급
@@ -62,13 +62,13 @@ export default function OnCallPage() {
       newDc.onopen = () => {
         console.log("▶️ DataChannel open");
 
-        // 첫 문장 정확도를 위해 3초 로딩 더 주기
         setTimeout(() => {
-          // 마이크 트랙을 활성화해서 음성이 전송되도록 함
           if (audioTrackRef.current) {
             audioTrackRef.current.enabled = true;
           }
-        }, 3000);
+
+          setIsOnCall(true);
+        }, 2000);
       };
 
       newDc.onclose = () => {
@@ -77,6 +77,8 @@ export default function OnCallPage() {
 
       newDc.onerror = (err) => {
         console.error("❌ DataChannel error:", err);
+        alert("오류가 발생했습니다. 통화 대기 페이지로 이동합니다");
+        navigate("/communication");
       };
 
       // SDP Offer 생성 및 전송
@@ -125,12 +127,57 @@ export default function OnCallPage() {
       if (audioTrackRef.current) audioTrackRef.current.stop();
       if (pcRef.current) pcRef.current.close();
       if (dcRef.current) dcRef.current.close();
+      setIsOnCall(false);
     }
+  };
+
+  const handleFinishCall = () => {
+    setIsOnCall(false);
+    navigate("/summary", { state: { messages, callSeconds } });
   };
 
   useEffect(() => {
     handleStartTranslate();
   }, []);
+
+  // 컴포넌트 언마운트 시 클린업
+  useEffect(() => {
+    return () => {
+      if (isOnCall) {
+        if (dcRef.current) {
+          try {
+            dcRef.current.close();
+            dcRef.current = null;
+          } catch (e) {
+            console.warn("DC close error on unmount:", e);
+          }
+        }
+        // PeerConnection과 오디오 트랙 정리
+        if (pcRef.current) {
+          try {
+            pcRef.current.getSenders().forEach((sender) => {
+              sender.track?.stop();
+            });
+            pcRef.current.close();
+            pcRef.current = null;
+          } catch (e) {
+            console.warn("PC close error on unmount:", e);
+          }
+        }
+
+        // MediaStreamTrack 정리 (audioTrackRef might be more reliable here)
+        if (audioTrackRef.current) {
+          try {
+            audioTrackRef.current.stop();
+            audioTrackRef.current = null;
+          } catch (e) {
+            console.warn("Track stop error on unmount:", e);
+          }
+        }
+        setIsOnCall(false);
+      }
+    };
+  }, [isOnCall]);
 
   return (
     <div className="flex flex-col items-center pt-5">
@@ -172,9 +219,7 @@ export default function OnCallPage() {
 
       <button
         className="flex justify-center items-center w-[64px] h-[64px] rounded-full bg-primary"
-        onClick={() =>
-          navigate("/summary", { state: { messages, callSeconds } })
-        }
+        onClick={handleFinishCall}
       >
         <Cancel width={24} height={24} />
       </button>
