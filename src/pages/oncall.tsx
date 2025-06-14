@@ -7,6 +7,8 @@ import { formatTime } from "../utils/formatTime";
 import apiRequest from "../api/apiRequest";
 import { useRef, useState, useEffect } from "react";
 import { MODEL } from "../constants/call";
+import useToggle from "../hooks/useToggle";
+import LoadingModal from "../components/call/LoadingModal";
 
 export default function OnCallPage() {
   const navigate = useNavigate();
@@ -18,6 +20,7 @@ export default function OnCallPage() {
 
   const [isOnCall, setIsOnCall] = useState(true);
   const [messages, setMessages] = useState<string[]>([]);
+  const { isOpen, toggle, setIsOpen } = useToggle(); // 모달 토글 훅
 
   const handleDataChannelMessage = (event: MessageEvent) => {
     const newMessage = event.data;
@@ -26,6 +29,7 @@ export default function OnCallPage() {
   };
 
   const handleStartTranslate = async () => {
+    setIsOpen(true);
     try {
       const data = await apiRequest({
         url: `/session`,
@@ -66,6 +70,7 @@ export default function OnCallPage() {
           if (audioTrackRef.current) {
             audioTrackRef.current.enabled = true;
           }
+          setIsOpen(false);
           setIsOnCall(true);
         }, 2000);
       };
@@ -136,6 +141,7 @@ export default function OnCallPage() {
   };
 
   useEffect(() => {
+    // toggle(); // 로딩 모달 열기
     handleStartTranslate();
   }, []);
 
@@ -224,6 +230,8 @@ export default function OnCallPage() {
           <Cancel width={24} height={24} />
         </button>
       </div>
+
+      <LoadingModal isOpen={isOpen} toggle={toggle} />
     </>
   );
 }
