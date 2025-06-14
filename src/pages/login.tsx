@@ -1,6 +1,4 @@
-import { useSetAtom } from "jotai";
 import Button from "../components/Button";
-import { isAuthAtom } from "../atom/authAtom";
 import { useNavigate } from "react-router-dom";
 import LogoIcon from "../assets/logo/logo.svg?react";
 import KakaoLogo from "../assets/logo/kakao.svg?react";
@@ -9,11 +7,9 @@ import NaverLogo from "../assets/logo/naver.svg?react";
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const setIsAuth = useSetAtom(isAuthAtom);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsAuth(true);
     navigate("/phq");
   };
 
