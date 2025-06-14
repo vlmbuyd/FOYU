@@ -28,6 +28,45 @@
   }
 }
 
+@layer utilities {
+  @keyframes modalFadeIn {
+    0% {
+      transform: scale(0.7);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes modalFadeOut {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.7);
+      opacity: 0;
+    }
+  }
+  @keyframes bounce-strong {
+    to {
+      transform: translateY(-7px);
+    }
+  }
+
+  .animate-modalFadeIn {
+    animation: modalFadeIn 0.4s ease;
+  }
+  .animate-modalFadeOut {
+    animation: modalFadeOut 0.4s ease;
+  }
+
+  .animate-bounce-strong {
+    animation: bounce-strong 0.6s infinite alternate;
+  }
+}
+
 :root {
   background-color: #fff;
 }

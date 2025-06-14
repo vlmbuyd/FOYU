@@ -32,7 +32,7 @@ const routes: RouteObject[] = [
         element: <TabBarLayout />,
         children: [
           {
-            // '/' 경로로 접근 시 '/main'으로 리다이렉트
+            // '/' 경로로 접근 시 '/login'으로 리다이렉트
             index: true,
             element: <Navigate to="/login" replace />,
           },
