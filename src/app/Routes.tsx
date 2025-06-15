@@ -17,6 +17,7 @@ import SummaryPage from "../pages/summary";
 import MissionPage from "../pages/mission";
 import MissionLayout from "./layout/MissionLayout";
 import TabBarLayout from "./layout/TabBarLayout";
+import MissionCompletePage from "../pages/mission-complete";
 
 const routes: RouteObject[] = [
   {
@@ -67,6 +68,10 @@ const routes: RouteObject[] = [
               {
                 path: "/summary",
                 element: <SummaryPage />,
+              },
+              {
+                path: "/mission/complete",
+                element: <MissionCompletePage />,
               },
             ],
           },

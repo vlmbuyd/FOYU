@@ -1,7 +1,27 @@
 import dayjs from "dayjs";
 import Progressbar from "../components/Progressbar";
+import { useEffect, useState } from "react";
+import apiRequest from "../api/apiRequest";
+import MissionCard from "../components/mission/MissionCard";
 
 export default function MissionPage() {
+  const [missions, setMissions] = useState<
+    { title: string; content: string }[]
+  >([]);
+
+  const getMissionList = async () => {
+    const { data } = await apiRequest({
+      url: "/mission",
+    });
+
+    // 가장 최신 미션으로 업데이트
+    setMissions(data[data.length - 1]);
+  };
+
+  useEffect(() => {
+    getMissionList();
+  }, []);
+
   return (
     <div className="flex flex-1 flex-col items-center w-full pt-3 bg-[#F8EEEE]">
       <div className="flex gap-3 mb-3">
@@ -14,7 +34,7 @@ export default function MissionPage() {
       </div>
 
       {/* 미션 현황 */}
-      <section className="flex flex-col">
+      <section className="flex flex-col mb-6">
         <div
           style={{
             boxShadow:
@@ -44,7 +64,7 @@ export default function MissionPage() {
               <div className="w-[1px] h-8 bg-[#E5E7EB]" />
               <div className="flex flex-col items-center">
                 <strong className="text-[18px] font-bold text-[#4b5563]">
-                  2
+                  3
                 </strong>
                 <span className="text-[12px] font-normal text-[#6b7280]">
                   진행 중
@@ -56,6 +76,18 @@ export default function MissionPage() {
           <Progressbar progress={1} total={3} />
         </div>
       </section>
+
+      <div className="flex flex-col items-center gap-5 mb-30">
+        {missions.length > 0 ? (
+          missions.map((mission, idx) => (
+            <MissionCard key={idx} data={{ idx: idx + 1, ...mission }} />
+          ))
+        ) : (
+          <p className="text-[16px] font-medium text-[#6b7280] pt-20">
+            미션을 불러오는 중입니다..
+          </p>
+        )}
+      </div>
     </div>
   );
 }

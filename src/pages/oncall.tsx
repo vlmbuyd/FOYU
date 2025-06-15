@@ -10,6 +10,11 @@ import { MODEL } from "../constants/call";
 import useToggle from "../hooks/useToggle";
 import LoadingModal from "../components/call/LoadingModal";
 
+type Message = {
+  role: "user" | "assistant";
+  content: string;
+};
+
 export default function OnCallPage() {
   const navigate = useNavigate();
   const callSeconds = useCallTimer();
@@ -19,13 +24,40 @@ export default function OnCallPage() {
   const audioTrackRef = useRef<MediaStreamTrack | null>(null);
 
   const [isOnCall, setIsOnCall] = useState(true);
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const { isOpen, toggle, setIsOpen } = useToggle(); // 모달 토글 훅
 
   const handleDataChannelMessage = (event: MessageEvent) => {
-    const newMessage = event.data;
-    console.log("📩 Message received:", newMessage);
-    setMessages((prev) => [...prev, newMessage]);
+    try {
+      const parsed = JSON.parse(event.data);
+
+      // AI 메시지 저장
+      if (
+        parsed.type === "response.audio_transcript.done" &&
+        typeof parsed.transcript === "string"
+      ) {
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: parsed.transcript },
+        ]);
+        return;
+      }
+
+      // 사용자 메시지 저장
+      if (
+        (parsed.type === "final_transcript" ||
+          parsed.type === "user.audio_transcript.done") &&
+        typeof parsed.transcript === "string"
+      ) {
+        setMessages((prev) => [
+          ...prev,
+          { role: "user", content: parsed.transcript },
+        ]);
+        return;
+      }
+    } catch (e) {
+      console.error("❌ JSON 파싱 오류:", e);
+    }
   };
 
   const handleStartTranslate = async () => {
@@ -135,9 +167,15 @@ export default function OnCallPage() {
     }
   };
 
-  const handleFinishCall = () => {
+  const handleFinishCall = async () => {
     setIsOnCall(false);
     navigate("/summary", { state: { messages, callSeconds } });
+    // 미션 생성 api 호출
+    await apiRequest({
+      url: `/mission`,
+      method: "POST",
+      data: { messages: messages },
+    });
   };
 
   useEffect(() => {
