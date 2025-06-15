@@ -1,9 +1,11 @@
 import Button from "../components/Button";
+import MissionToast from "../components/mission/MissionToast";
 import { awards, status } from "../constants/mission";
 
 export default function MissionCompletePage() {
   return (
     <div className="flex flex-col items-center pt-7">
+      <MissionToast />
       <div className="flex items-center justify-around w-[343px] h-[101px] bg-white/90 rounded-[24px] mb-20">
         {status.map((item, idx) => (
           <div
@@ -21,7 +23,7 @@ export default function MissionCompletePage() {
         ))}
       </div>
 
-      <div className="flex flex-wrap justify-center gap-3 mb-10">
+      <div className="flex flex-wrap justify-center gap-3 mb-20">
         {awards.map((item, idx) => (
           <div
             key={`awards-${idx}`}
