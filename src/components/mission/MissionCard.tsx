@@ -45,7 +45,7 @@ export default function MissionCard({ data }: MissionCardProps) {
 
           <button
             className="w-[101px] h-9 text-[14px] font-medium text-white bg-primary rounded-[8px]"
-            onClick={() => navigate("/mission/complete")}
+            onClick={() => navigate("/complete")}
           >
             완료하기
           </button>

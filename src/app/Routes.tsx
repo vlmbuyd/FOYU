@@ -70,7 +70,7 @@ const routes: RouteObject[] = [
                 element: <SummaryPage />,
               },
               {
-                path: "/mission/complete",
+                path: "/complete",
                 element: <MissionCompletePage />,
               },
             ],

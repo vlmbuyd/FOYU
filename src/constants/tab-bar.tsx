@@ -33,7 +33,8 @@ const tabBarList = [
     defaultIcon: <MissionIcon fill="#6B7280" />,
     activeIcon: <MissionIcon fill="#FF9B9B" />,
     path: "/mission",
-    isActive: (path: string) => path.startsWith("/mission"),
+    isActive: (path: string) =>
+      path.startsWith("/mission") || path === "/complete",
   },
   {
     label: "커뮤니티",
