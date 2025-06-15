@@ -6,8 +6,6 @@ export default function SummaryPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.state);
-
   return (
     <div className="flex flex-col justify-between items-center h-[85%] pt-8">
       <div>

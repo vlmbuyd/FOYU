@@ -78,7 +78,7 @@ export default function MissionPage() {
       </section>
 
       <div className="flex flex-col items-center gap-5 mb-30">
-        {missions.length > 0 ? (
+        {missions ? (
           missions.map((mission, idx) => (
             <MissionCard key={idx} data={{ idx: idx + 1, ...mission }} />
           ))
