@@ -169,13 +169,20 @@ export default function OnCallPage() {
 
   const handleFinishCall = async () => {
     setIsOnCall(false);
-    navigate("/summary", { state: { messages, callSeconds } });
+    // 대화내역 요약 api 호출
+    const { data } = await apiRequest({
+      url: `/summarize`,
+      method: "POST",
+      data: { messages: messages },
+    });
     // 미션 생성 api 호출
     await apiRequest({
       url: `/mission`,
       method: "POST",
       data: { messages: messages },
     });
+
+    navigate("/summary", { state: { data, callSeconds } });
   };
 
   useEffect(() => {

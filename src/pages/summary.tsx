@@ -34,10 +34,7 @@ export default function SummaryPage() {
           className="flex flex-col gap-1 w-[343px] bg-white/90 p-6 mb-6 rounded-[24px]"
         >
           <p className="text-[14px] font-normal text-[#374151]">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum
-            omnis nisi recusandae corporis beatae sunt fuga aspernatur ad
-            nesciunt voluptatibus sed magni, labore dolores. Tempore illo cumque
-            quidem voluptatem atque?
+            {location.state.data.summary}
           </p>
         </div>
       </div>
