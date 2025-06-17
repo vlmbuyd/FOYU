@@ -15,9 +15,9 @@ export default function MissionToast() {
         <motion.div
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ x: 300, opacity: 0 }}
+          exit={{ x: 70, opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="fixed top-[20%] left-1/2 -translate-x-1/2 w-[343px] py-4 px-6 rounded-[24px] bg-white/95 text-center shadow-lg z-50"
+          className="fixed top-[15%] left-1/2 -translate-x-1/2 w-[343px] h-[96px] py-4 px-6 rounded-[24px] bg-white/95 text-center shadow-lg z-50"
         >
           <h2 className="text-[20px] font-bold text-primary mb-1">
             축하합니다! 🎉
